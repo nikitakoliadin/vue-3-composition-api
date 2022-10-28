@@ -9,6 +9,8 @@ import NetworkError from '@/views/NetworkError.vue'
 import NProgress from 'nprogress'
 import EventService from '@/services/EventService.js'
 import GStore from '@/store'
+import CapacityRegular from '@/views/CapacityRegular.vue'
+import CapacityComposition from '@/views/CapacityComposition.vue'
 
 const routes = [
   {
@@ -89,6 +91,16 @@ const routes = [
     path: '/network-error',
     name: 'NetworkError',
     component: NetworkError
+  },
+  {
+    path: '/capacity-regular',
+    name: 'CapacityRegular',
+    component: CapacityRegular
+  },
+  {
+    path: '/capacity-composition',
+    name: 'CapacityComposition',
+    component: CapacityComposition
   }
 ]
 
