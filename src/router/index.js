@@ -11,6 +11,7 @@ import EventService from '@/services/EventService.js'
 import GStore from '@/store'
 import CapacityRegular from '@/views/CapacityRegular.vue'
 import CapacityComposition from '@/views/CapacityComposition.vue'
+import CapacityReactive from '@/views/CapacityReactive.vue'
 
 const routes = [
   {
@@ -101,6 +102,11 @@ const routes = [
     path: '/capacity-composition',
     name: 'CapacityComposition',
     component: CapacityComposition
+  },
+  {
+    path: '/capacity-reactive',
+    name: 'CapacityReactive',
+    component: CapacityReactive
   }
 ]
 

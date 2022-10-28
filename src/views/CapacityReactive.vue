@@ -12,19 +12,21 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { reactive, computed, toRefs } from 'vue'
 export default {
   setup() {
-    const capacity = ref(3)
-    const attending = ref(['Tim', 'Bob', 'Joe'])
-    const spacesLeft = computed(() => {
-      return capacity.value - attending.value.length
+    const event = reactive({
+      capacity: 3,
+      attending: ['Tim', 'Bob', 'Joe'],
+      spacesLeft: computed(() => {
+        return event.capacity - event.attending.length
+      })
     })
 
     function increaseCapacity() {
-      capacity.value++
+      event.capacity++
     }
-    return { capacity, increaseCapacity, attending, spacesLeft }
+    return { ...toRefs(event), increaseCapacity }
   }
 }
 </script>

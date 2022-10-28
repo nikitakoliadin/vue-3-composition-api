@@ -13,6 +13,10 @@
       <router-link :to="{ name: 'CapacityComposition' }"
         >Capacity Composition
       </router-link>
+      |
+      <router-link :to="{ name: 'CapacityReactive' }"
+        >Capacity Reactive
+      </router-link>
     </div>
     <router-view />
   </div>
