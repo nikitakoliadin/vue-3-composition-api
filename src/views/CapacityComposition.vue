@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount, onMounted } from 'vue'
 export default {
   setup() {
     const capacity = ref(3)
@@ -24,6 +24,13 @@ export default {
     function increaseCapacity() {
       capacity.value++
     }
+
+    onBeforeMount(() => {
+      console.log('Before Mount!')
+    })
+    onMounted(() => {
+      console.log('Mounted!')
+    })
     return { capacity, increaseCapacity, attending, spacesLeft }
   }
 }

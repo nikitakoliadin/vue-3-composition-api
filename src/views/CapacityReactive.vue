@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { reactive, computed, toRefs } from 'vue'
+import { reactive, computed, toRefs, onBeforeMount, onMounted } from 'vue'
 export default {
   setup() {
     const event = reactive({
@@ -26,6 +26,13 @@ export default {
     function increaseCapacity() {
       event.capacity++
     }
+
+    onBeforeMount(() => {
+      console.log('Before Mount!')
+    })
+    onMounted(() => {
+      console.log('Mounted!')
+    })
     return { ...toRefs(event), increaseCapacity }
   }
 }

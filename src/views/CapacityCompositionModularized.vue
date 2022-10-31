@@ -14,6 +14,7 @@
 <script>
 import useEventSpace from '@/use/event-space'
 import useMapping from '@/use/mapping'
+import { onBeforeMount, onMounted } from 'vue'
 export default {
   setup() {
     // return { ...useEventSpace(), ...useMapping() } // Bad
@@ -24,6 +25,13 @@ export default {
       increaseCapacity
     } = useEventSpace()
     const { map, embedId } = useMapping()
+
+    onBeforeMount(() => {
+      console.log('Before Mount!')
+    })
+    onMounted(() => {
+      console.log('Mounted!')
+    })
     return { capacity, attending, spacesLeft, increaseCapacity, map, embedId }
   }
 }

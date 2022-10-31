@@ -28,6 +28,12 @@ export default {
     spacesLeft() {
       return this.capacity - this.attending.length
     }
+  },
+  beforeMount() {
+    console.log('Before Mount!')
+  },
+  mounted() {
+    console.log('Mounted!')
   }
 }
 </script>
