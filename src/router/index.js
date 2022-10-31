@@ -12,6 +12,7 @@ import GStore from '@/store'
 import CapacityRegular from '@/views/CapacityRegular.vue'
 import CapacityComposition from '@/views/CapacityComposition.vue'
 import CapacityReactive from '@/views/CapacityReactive.vue'
+import CapacityCompositionModularized from '@/views/CapacityCompositionModularized.vue'
 
 const routes = [
   {
@@ -107,6 +108,11 @@ const routes = [
     path: '/capacity-reactive',
     name: 'CapacityReactive',
     component: CapacityReactive
+  },
+  {
+    path: '/capacity-composition-modularized',
+    name: 'CapacityCompositionModularized',
+    component: CapacityCompositionModularized
   }
 ]
 
