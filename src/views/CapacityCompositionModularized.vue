@@ -8,12 +8,17 @@
         {{ name }}
       </li>
     </ul>
+    Search for <input v-model="searchInput" />
+    <div>
+      <p>Number of events: {{ results }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import useEventSpace from '@/use/event-space'
 import useMapping from '@/use/mapping'
+import useSearch from '@/use/search'
 import { onBeforeMount, onMounted } from 'vue'
 export default {
   setup() {
@@ -25,6 +30,7 @@ export default {
       increaseCapacity
     } = useEventSpace()
     const { map, embedId } = useMapping()
+    const { searchInput, results } = useSearch()
 
     onBeforeMount(() => {
       console.log('Before Mount!')
@@ -32,7 +38,16 @@ export default {
     onMounted(() => {
       console.log('Mounted!')
     })
-    return { capacity, attending, spacesLeft, increaseCapacity, map, embedId }
+    return {
+      capacity,
+      attending,
+      spacesLeft,
+      increaseCapacity,
+      map,
+      embedId,
+      searchInput,
+      results
+    }
   }
 }
 </script>

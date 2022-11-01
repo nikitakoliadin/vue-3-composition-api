@@ -8,15 +8,22 @@
         {{ name }}
       </li>
     </ul>
+    Search for <input v-model="searchInput" />
+    <div>
+      <p>Number of events: {{ results }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import eventApi from '@/api/events'
 export default {
   data() {
     return {
       capacity: 3,
-      attending: ['Tim', 'Bob', 'Joe']
+      attending: ['Tim', 'Bob', 'Joe'],
+      searchInput: '',
+      results: 0
     }
   },
   methods: {
@@ -34,6 +41,14 @@ export default {
   },
   mounted() {
     console.log('Mounted!')
+  },
+  watch: {
+    searchInput: {
+      handler(searchInput) {
+        this.results = eventApi.getEventCount(searchInput)
+      },
+      immediate: true
+    }
   }
 }
 </script>

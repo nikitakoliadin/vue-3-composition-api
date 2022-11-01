@@ -8,11 +8,24 @@
         {{ name }}
       </li>
     </ul>
+    Search for <input v-model="searchInput" />
+    <div>
+      <p>Number of events: {{ results }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { reactive, computed, toRefs, onBeforeMount, onMounted } from 'vue'
+import {
+  reactive,
+  computed,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  watch,
+  ref
+} from 'vue'
+import eventApi from '@/api/events'
 export default {
   setup() {
     const event = reactive({
@@ -33,7 +46,18 @@ export default {
     onMounted(() => {
       console.log('Mounted!')
     })
-    return { ...toRefs(event), increaseCapacity }
+
+    const searchInput = ref('')
+    const results = ref(0)
+
+    watch(
+      searchInput,
+      () => {
+        results.value = eventApi.getEventCount(searchInput.value)
+      },
+      { immediate: true }
+    )
+    return { ...toRefs(event), increaseCapacity, searchInput, results }
   }
 }
 </script>
