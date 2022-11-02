@@ -10,6 +10,8 @@
     </ul>
     Search for <input v-model="searchInput" />
     <div>
+      <p>Loading: {{ loading }}</p>
+      <p>Error: {{ error }}</p>
       <p>Number of events: {{ results }}</p>
     </div>
   </div>
@@ -23,12 +25,26 @@ export default {
       capacity: 3,
       attending: ['Tim', 'Bob', 'Joe'],
       searchInput: '',
+      loading: false,
+      error: null,
       results: 0
     }
   },
   methods: {
     increaseCapacity() {
       this.capacity++
+    },
+    async loadData(search) {
+      this.loading = true
+      this.error = null
+      this.results = 0
+      try {
+        this.results = await eventApi.getEventCount(search)
+      } catch (e) {
+        this.error = e
+      } finally {
+        this.loading = false
+      }
     }
   },
   computed: {
@@ -45,7 +61,11 @@ export default {
   watch: {
     searchInput: {
       handler(searchInput) {
-        this.results = eventApi.getEventCount(searchInput)
+        if (searchInput !== '') {
+          this.loadData(searchInput)
+        } else {
+          this.results = 0
+        }
       },
       immediate: true
     }

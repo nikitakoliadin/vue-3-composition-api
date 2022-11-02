@@ -10,6 +10,8 @@
     </ul>
     Search for <input v-model="searchInput" />
     <div>
+      <p>Loading: {{ loading }}</p>
+      <p>Error: {{ error }}</p>
       <p>Number of events: {{ results }}</p>
     </div>
   </div>
@@ -18,6 +20,7 @@
 <script>
 import { ref, computed, onBeforeMount, onMounted, watch } from 'vue'
 import eventApi from '@/api/events'
+import usePromise from '@/composables/use-promise'
 export default {
   setup() {
     const capacity = ref(3)
@@ -38,15 +41,15 @@ export default {
     })
 
     const searchInput = ref('')
-    const results = ref(0)
+    const getEvents = usePromise(search => eventApi.getEventCount(search.value))
 
-    watch(
-      searchInput,
-      () => {
-        results.value = eventApi.getEventCount(searchInput.value)
-      },
-      { immediate: true }
-    )
+    watch(searchInput, () => {
+      if (searchInput.value !== '') {
+        getEvents.createPromise(searchInput)
+      } else {
+        getEvents.results.value = 0
+      }
+    })
 
     return {
       capacity,
@@ -54,7 +57,7 @@ export default {
       attending,
       spacesLeft,
       searchInput,
-      results
+      ...getEvents
     }
   }
 }

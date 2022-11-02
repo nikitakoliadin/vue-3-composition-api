@@ -10,6 +10,8 @@
     </ul>
     Search for <input v-model="searchInput" />
     <div>
+      <p>Loading: {{ loading }}</p>
+      <p>Error: {{ error }}</p>
       <p>Number of events: {{ results }}</p>
     </div>
   </div>
@@ -30,7 +32,7 @@ export default {
       increaseCapacity
     } = useEventSpace()
     const { map, embedId } = useMapping()
-    const { searchInput, results } = useSearch()
+    const { searchInput, loading, error, results } = useSearch()
 
     onBeforeMount(() => {
       console.log('Before Mount!')
@@ -46,6 +48,8 @@ export default {
       map,
       embedId,
       searchInput,
+      loading,
+      error,
       results
     }
   }

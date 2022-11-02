@@ -10,6 +10,8 @@
     </ul>
     Search for <input v-model="searchInput" />
     <div>
+      <p>Loading: {{ loading }}</p>
+      <p>Error: {{ error }}</p>
       <p>Number of events: {{ results }}</p>
     </div>
   </div>
@@ -48,16 +50,42 @@ export default {
     })
 
     const searchInput = ref('')
+    const loading = ref(false)
+    const error = ref(null)
     const results = ref(0)
+
+    async function loadData(search) {
+      loading.value = true
+      error.value = null
+      results.value = 0
+      try {
+        results.value = eventApi.getEventCount(search.value)
+      } catch (e) {
+        error.value = e
+      } finally {
+        loading.value = false
+      }
+    }
 
     watch(
       searchInput,
       () => {
-        results.value = eventApi.getEventCount(searchInput.value)
+        if (searchInput.value !== '') {
+          loadData(searchInput)
+        } else {
+          results.value = 0
+        }
       },
       { immediate: true }
     )
-    return { ...toRefs(event), increaseCapacity, searchInput, results }
+    return {
+      ...toRefs(event),
+      increaseCapacity,
+      searchInput,
+      loading,
+      error,
+      results
+    }
   }
 }
 </script>
