@@ -13,6 +13,7 @@ import CapacityRegular from '@/views/CapacityRegular.vue'
 import CapacityComposition from '@/views/CapacityComposition.vue'
 import CapacityReactive from '@/views/CapacityReactive.vue'
 import CapacityCompositionModularized from '@/views/CapacityCompositionModularized.vue'
+import CapacityCompositionWithLoading from '@/views/CapacityCompositionWithLoading.vue'
 
 const routes = [
   {
@@ -113,6 +114,11 @@ const routes = [
     path: '/capacity-composition-modularized',
     name: 'CapacityCompositionModularized',
     component: CapacityCompositionModularized
+  },
+  {
+    path: '/capacity-composition-with-loading',
+    name: 'CapacityCompositionWithLoading',
+    component: CapacityCompositionWithLoading
   }
 ]
 

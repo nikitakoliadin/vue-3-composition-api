@@ -6,7 +6,7 @@
     <div id="nav">
       <router-link :to="{ name: 'EventList' }">Events</router-link> |
       <router-link :to="{ name: 'About' }">About</router-link>
-      <br/>
+      <br />
       <router-link :to="{ name: 'CapacityRegular' }"
         >Capacity Regular</router-link
       >
@@ -21,6 +21,10 @@
       |
       <router-link :to="{ name: 'CapacityCompositionModularized' }"
         >Capacity Composition Modularized
+      </router-link>
+      |
+      <router-link :to="{ name: 'CapacityCompositionWithLoading' }"
+        >Capacity Composition With Loading
       </router-link>
     </div>
     <router-view />
