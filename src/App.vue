@@ -1,4 +1,13 @@
 <template>
+  <teleport to="#end-of-body" :disabled="!showText" v-if="showText">
+    This should be at the end.
+  </teleport>
+  <teleport to="#end-of-body" :disabled="!showText2" v-if="showText2">
+    This should be at the end too.
+  </teleport>
+  <div>
+    This should be at the top.
+  </div>
   <div id="app">
     <div id="flashMessage" v-if="GStore.flashMessage">
       {{ GStore.flashMessage }}
@@ -28,12 +37,24 @@
       </router-link>
     </div>
     <router-view />
+    <button @click="showText = !showText">
+      Toggle showText
+    </button>
+    <button @click="showText2 = !showText2">
+      Toggle showText2
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  inject: ['GStore']
+  inject: ['GStore'],
+  data() {
+    return {
+      showText: false,
+      showText2: false
+    }
+  }
 }
 </script>
 
